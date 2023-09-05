@@ -1,36 +1,36 @@
 name: 'Terraform'
 on:
-    push:
-      branches: [ "dev" ]
-    pull_request:
+  push:
+    branches: [ "dev" ]
+  pull_request:
   
-  jobs:
-    terraform:
-      name: 'Terraform-Validation'
-      runs-on: 
-      - self-hosted    
-      defaults:
-        run:
-          shell: bash
-      steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        
-      - name: Terraform Init
-        run: terraform init
-  
-      - name: Terraform Format
-        run: terraform fmt
-  
-      - name: Terraform validate
-        run: terraform validate
-    terraform:
-      name: 'Terraform-Plan'
-      runs-on: 
-      - self-hosted    
-      defaults:
-        run:
-            shell: bash
-      steps:
-      - name: Terraform plan
-        run: terraform plan
+jobs:
+  terraform-validation:
+    name: 'Terraform-Validation'
+    runs-on: 
+    - self-hosted    
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Format
+      run: terraform fmt
+
+    - name: Terraform validate
+      run: terraform validate
+  terraform-plan:
+    name: 'Terraform-Plan'
+    runs-on: 
+    - self-hosted    
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - name: Terraform plan
+      run: terraform plan
